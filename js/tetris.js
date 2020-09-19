@@ -1,7 +1,7 @@
 /* JS */
 
 // Grid constants
-const width = 10
+const width = 20
 const height = 20
 
 // Tetrominoes
