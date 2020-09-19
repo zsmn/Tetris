@@ -208,35 +208,39 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function rotate(){
     if(timer1 != null || timer3 != null){
+      var newRotation = (currentRotation -1 + 4)%4
+      var newBlocks = theTetrominoes[actualPiece][newRotation]
+      var turn = true
 
-      undraw()
-
-      // Check if rotate collides
-      auxRotation = (currentRotation + 1) % 4
-      auxSquares = theTetrominoes[actualPiece][currentRotation]
-
-      vet = []
-
-      auxSquares.forEach(index => {
-          vet.push((currentPosition + index) % 10)
-      })
-
-      var cross = 0
-      for(var x = 0; x < vet.length; x++){
-          for(var y = 0; y < vet.length; y++){
-              if(Math.abs(vet[x] - vet[y]) > 3){
-                  cross = 1;
-                  break;
-              }
-          }
+      if(newBlocks.some(item => squares[currentPosition + item].classList.contains('taken'))){
+        turn = false
       }
-
-      if(!cross && !auxSquares.some(index => squares[currentPosition + index].classList.contains('taken'))){
-          currentRotation = auxRotation
-          actualBlocks = auxSquares
+      var indLef = 0
+      var colLef = (newBlocks[0])%10
+      var indRig = 0
+      var colRig = (newBlocks[0])%10
+      for(var i=0; i<4; i++){
+        var colatu = (newBlocks[i])%10
+        if(colatu < colLef){
+          colLef = colatu
+          indLef = i
+        }
+        if(colatu > colRig){
+          colRig = colatu
+          indRig = i
+        }
       }
-
-      draw()
+      var ncr = (currentPosition + newBlocks[indRig])%10
+      var ncl = (currentPosition + newBlocks[indLef])%10
+      if(ncr < ncl){
+        turn = false
+      }
+      if(turn){
+        undraw()
+        actualBlocks = newBlocks
+        currentRotation = newRotation
+        draw()
+      }
     }
   }
 
