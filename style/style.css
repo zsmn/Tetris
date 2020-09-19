@@ -1,4 +1,44 @@
-.grid{
+  /*Conteiner of the game windows*/
+  .conteiner{
+    display: flex;
+  }
+
+  /*Conteiner of the buttons*/
+  .buttons{
+    display: flex;
+  }
+  
+  /*cointeiner of the ponints and the lines*/
+  .dados{
+    display: flex;
+  }
+  
+  /*space between points and lines*/
+  .dados div{
+    width: 10px;
+    height: 1px;
+  }
+
+  /*Next piece grid*/
+  .mini-grid{
+    margin-left: 50px;
+    width: 132px;
+    height: 88px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+  }
+  
+  .mini-grid div{
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+  }
+  
+  /*Main grid*/
+  .grid{
     width: 220px;
     height: 440px;
     display: flex;
@@ -6,6 +46,7 @@
     background-color: black;
   }
   
+
   .grid div{
     width: 20px;
     height: 20px;
@@ -13,3 +54,42 @@
     border-style: solid;
     border-color: black;
   }
+  
+  /*Collors Pallete*/
+
+  .quadradinho {
+    background-color:red;
+  }
+  
+  .magenta{
+    background-color: magenta;
+  }
+  
+  .qgreen {
+    background-color: darkgreen;
+  }
+  
+  .qred {
+    background-color:red;
+  }
+  
+  .qblue{
+    background-color: midnightblue;
+  }
+  
+  .qyellow{
+    background-color: gold;
+  }
+  
+  .qorange{
+    background-color: orange;
+  }
+  
+  .qpurple{
+    background-color: purple;
+  }
+  
+  .qbrown{
+    background-color: brown;
+  }
+  
