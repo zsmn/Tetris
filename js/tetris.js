@@ -59,17 +59,36 @@ const quad = ['qpurple', 'qgreen', 'qred', 'qorange', 'qyellow', 'qblue', 'qbrow
 const theTetrominoes = [Ipiece, Jpiece, Lpiece, Opiece, Spiece, Tpiece, Zpiece]
 
 document.addEventListener('DOMContentLoaded', () => {
-	// Creating grid
+  // Creating grid
   const grid = document.querySelector('.grid')
   for(var x = 0; x < (width * height); x++){
   	grid.innerHTML += "<div></div>"
   }
   
   // Loading squares
-	const squares = Array.from(document.querySelectorAll('.grid div'))
+  const squares = Array.from(document.querySelectorAll('.grid div'))
   
   // Loading score and start button vars
   const scoreDisplay = document.querySelector('#score')
   const startButton  = document.querySelector('#start-button')
+  
+  //Variables associated with the grid.
+  var currentPosition = 4
+  var currentRotation = 0
+  var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
+  var actualBlocks = theTetrominoes[actualPiece][currentRotation]
+
+  //Function to Draw every block of the grid
+  function draw(){
+    actualBlocks.forEach(item => {
+      squares[(currentPosition + item)].classList.add(quadColor[actualPiece])
+    })
+  }
+  //Function to undraw every block of the grid	 
+  function undraw(){
+    actualBlocks.forEach(item =>{
+      squares[currentPosition + item].classList.remove(quadColor[actualPiece])
+    })
+  }
   
 })
