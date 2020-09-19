@@ -4,7 +4,7 @@ const height = 20
 
 // Tetrominoes
 
-document.addEventListerner('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 	// Creating grid
   const grid = document.querySelector('.grid')
   for(var x = 0; x < (width * height); x++){
