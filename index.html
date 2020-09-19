@@ -1,6 +1,56 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> Tetris 20 </title>
+         <script src="js/tetris.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+        <link rel="stylesheet" href="style/style.css">
+    </head>
+    <body>
+        <section class="section">
+            <center><h1 class="title">Tetris 20</h1></center>
+            <center><p class="subtitle">A fun game made with JS, CSS and HTML!</p></center>
+            <div class='buttons is-centered'>  
+                <button class="button is-primary is-light"> 
+                    Start 
+                </button> 
+                <button class="button is-danger"> 
+                    Pause
+                </button> 
+                <button class="button is-success"> 
+                    New Game
+                </button>
+            </div>
+        </section>
+
+        <div class="columns">
+            <div class="column">
+                <h4 class="title is-4"> Player's Score: Over 9000 </h4>
+                <h5 class="title is-5"> Next Tetromino:</h5>
+            </div>
+            <div class="column">
+                <div class="grid"></div>
+            </div>
+            <div class="column">
+                <h4 class="title is-4"> Instructions </h4>
+                <p> 1) Use Key-Up to rotate each tetromino.</p>
+                <p> 2) Use Key-Left to move each tetromino to the left.</p>
+                <p> 3) Use Key-Right to move each tetromino to the right.</p>
+                <p> 4) Use Key-Down to accelerate each tetromino to the bottom of the grid.</p>
+                <p> 5) After filling up one entirely line, you earn 10 points.</p>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+    <head>
         <title> Test </title>
         <meta content="utf-8" http-equiv="encoding">
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -17,3 +67,4 @@
         </div>
     </body>
 </html>
+-->
