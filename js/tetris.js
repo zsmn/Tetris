@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   	draw()
     var lock = false
     actualBlocks.forEach(item =>{
-      if(item+currentPosition+width >= 200){
+      if(item+currentPosition+width >= (width*height)){
         lock = true
       }
     })
