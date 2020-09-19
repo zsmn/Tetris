@@ -1,20 +1,26 @@
-
-    /*Conteiner of the game windows*/
+  /*Conteiner of the game windows*/
   .conteiner{
     display: flex;
   }
+
+ 
 
   /*Conteiner of the buttons*/
   .buttons{
     display: flex;
   }
+
+  /*Conteiner of Text*/
+  html{
+      background-color: #01baef;
+  }
   
-  /*cointeiner of the ponints and the lines*/
+  /*Conteiner of the ponints and the lines*/
   .dados{
     display: flex;
   }
   
-  /*space between points and lines*/
+  /*Space between points and lines*/
   .dados div{
     width: 10px;
     height: 1px;
