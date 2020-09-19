@@ -1,4 +1,5 @@
-  /*Conteiner of the game windows*/
+
+    /*Conteiner of the game windows*/
   .conteiner{
     display: flex;
   }
@@ -39,8 +40,8 @@
   
   /*Main grid*/
   .grid{
-    width: 220px;
-    height: 440px;
+    width: 400px;
+    height: 400px;
     display: flex;
     flex-wrap: wrap;
     background-color: black;
