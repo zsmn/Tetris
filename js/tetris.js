@@ -1,3 +1,5 @@
+/* JS */
+
 // Grid constants
 const width = 10
 const height = 20
@@ -53,7 +55,7 @@ const Zpiece = [
 ]
 
 // Collors pallete
-const quad = ['qpurple', 'qgreen', 'qred', 'qorange', 'qyellow', 'qblue', 'qbrown']
+const quadColor = ['qpurple', 'qgreen', 'qred', 'qorange', 'qyellow', 'qblue', 'qbrown']
 
 // Tetrominoes vector
 const theTetrominoes = [Ipiece, Jpiece, Lpiece, Opiece, Spiece, Tpiece, Zpiece]
@@ -77,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var currentRotation = 0
   var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
   var actualBlocks = theTetrominoes[actualPiece][currentRotation]
-
   //Function to Draw every block of the grid
   function draw(){
     actualBlocks.forEach(item => {
@@ -89,6 +90,38 @@ document.addEventListener('DOMContentLoaded', () => {
     actualBlocks.forEach(item =>{
       squares[currentPosition + item].classList.remove(quadColor[actualPiece])
     })
+  }
+  function moveDown(){
+    freeze()
+    undraw()
+    currentPosition += width
+    draw()
+  }
+	function freeze(){
+  	draw()
+    var lock = false
+    actualBlocks.forEach(item =>{
+      if(item+currentPosition+width >= 200){
+        lock = true
+      }
+    })
+    if(lock == false){
+      actualBlocks.forEach(item => {
+        if(squares[currentPosition + item + width].classList.contains('taken')){
+          lock = true
+        }
+      })
+    }
+    if(lock == true){
+      actualBlocks.forEach(item => {
+      	squares[(currentPosition + item)].classList.add('taken')
+    	})
+
+      currentPosition = 4
+      currentRotation = 0
+      actualPiece = Math.floor(Math.random()*theTetrominoes.length)
+      actualBlocks = theTetrominoes[actualPiece][currentRotation]
+    }
   }
   
 })
