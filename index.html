@@ -10,9 +10,9 @@
     </head>
     <body>
         <section class="section">
-            <center><h1 class="title">Tetris 20</h1></center>
-            <center><p class="subtitle">A fun game made with JS, CSS and HTML!</p></center>
-            <div class='buttons is-centered'>  
+            <h1 class="title" style="margin-left:650px">Tetris 20</h1>
+            <p class="subtitle" style="margin-left:525px">A fun game made with JS, CSS and HTML!</p>
+            <div class='buttons' style="margin-left:580px">  
                 <button class="button is-primary is-light"> 
                     Start 
                 </button> 
@@ -26,45 +26,25 @@
         </section>
 
         <div class="columns">
-            <div class="column">
-                <h4 class="title is-4"> Player's Score: Over 9000 </h4>
+            <div class="column is-one-fifths" style="margin-left:20px">
+                <h4 class="title is-4" id="score"> Player's Score: Over 9000 </h4>
                 <h5 class="title is-5"> Next Tetromino:</h5>
             </div>
-            <div class="column">
+            <div class="column is-one-fifths">
+                <div class="bgimg"></div>
                 <div class="grid"></div>
             </div>
-            <div class="column">
-                <h4 class="title is-4"> Instructions </h4>
-                <p> 1) Use Key-Up to rotate each tetromino.</p>
-                <p> 2) Use Key-Left to move each tetromino to the left.</p>
-                <p> 3) Use Key-Right to move each tetromino to the right.</p>
-                <p> 4) Use Key-Down to accelerate each tetromino to the bottom of the grid.</p>
-                <p> 5) After filling up one entirely line, you earn 10 points.</p>
+            <div class="column is-one-fifths">
+                <h4 class="title is-4" style="margin-left:130px"> Instructions </h4>
+                <div class="instructions" style="margin-right:20px">
+                    <p> <strong>1) Use Key-Up to rotate each tetromino.</strong></p>
+                    <p> <strong>2) Use Key-Left to move each tetromino to the left.</strong></p>
+                    <p> <strong>3) Use Key-Right to move each tetromino to the right.</strong></p>
+                    <p> <strong>4) Use Key-Down to accelerate each tetromino to the bottom of the grid.</strong></p>
+                    <p> <strong>5) After filling up one entirely line, you earn 10 points.</strong></p>
+                    <p> <strong>6) Have Fun!</strong></p>
+                </div>
             </div>
         </div>
     </body>
 </html>
-
-
-
-<!--
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Test </title>
-        <meta content="utf-8" http-equiv="encoding">
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <script src="js/tetris.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="style/style.css">
-    </head>
-
-    <body>
-        <h3> Score: <span id="score"></span></h3>
-        <button id="start-button">Start/Pause</button>
-
-        <div class = "grid">
-            
-        </div>
-    </body>
-</html>
--->
