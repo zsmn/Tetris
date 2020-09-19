@@ -1,0 +1,15 @@
+.grid{
+    width: 220px;
+    height: 440px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+  }
+  
+  .grid div{
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+  }
