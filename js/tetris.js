@@ -79,24 +79,28 @@ document.addEventListener('DOMContentLoaded', () => {
   var currentRotation = 0
   var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
   var actualBlocks = theTetrominoes[actualPiece][currentRotation]
+
   //Function to Draw every block of the grid
   function draw(){
     actualBlocks.forEach(item => {
       squares[(currentPosition + item)].classList.add(quadColor[actualPiece])
     })
   }
+
   //Function to undraw every block of the grid	 
   function undraw(){
     actualBlocks.forEach(item =>{
       squares[currentPosition + item].classList.remove(quadColor[actualPiece])
     })
   }
+
   function moveDown(){
     freeze()
     undraw()
     currentPosition += width
     draw()
   }
+
 	function freeze(){
   	draw()
     var lock = false
@@ -124,4 +128,116 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
+  // Setting loop for moveDown tetrominoes
+  var fastDown = false
+  var originalWait = 500
+  var wait = originalWait
+  timer1 = setInterval(moveDown, wait)
+  var timer3 = null
+  function control(e){
+    if(e.keyCode === 37){
+      moveLeft()
+    }
+    if(e.keyCode === 39){
+      moveRight()
+    }
+    if(e.keyCode === 38){
+      rotate()
+    }
+    if(e.keyCode === 40){
+      wait = originalWait
+      if(timer1){
+        fastDown = false
+        clearInterval(timer3)
+        timer3 = null
+        //timer1 = setInterval(moveDown, wait)
+      }
+    }
+  }
+  document.addEventListener('keyup',control)
+  
+  function downBlock(e){
+    if(e.keyCode === 40){
+      if(!fastDown){
+        wait = Math.min(wait,100)
+        clearInterval(timer3)
+        timer3 = null
+        if(timer1){
+          fastDown = true
+          clearInterval(timer3)
+          timer3 = setInterval(moveDown,wait)
+        }
+      }
+    }
+  }
+  document.addEventListener('keydown', downBlock)
+  
+  function moveLeft(){
+    if(timer1 != null || timer3 != null){ 
+
+      undraw()
+
+      const isAtLeftEdge = actualBlocks.some(index => (currentPosition + index) % width === 0)
+
+      if(!isAtLeftEdge) currentPosition = currentPosition - 1
+
+      if(actualBlocks.some(index => squares[currentPosition + index].classList.contains('taken'))){
+          currentPosition = currentPosition + 1
+      }
+
+      draw()
+    }
+  }
+  
+  function moveRight(){
+    if(timer1 != null || timer3 != null){
+    
+      undraw()
+
+      const isAtRightEdge = actualBlocks.some(index => (currentPosition + index) % width === width - 1)
+
+      if(!isAtRightEdge) currentPosition = currentPosition + 1
+
+      if(actualBlocks.some(index => squares[currentPosition + index].classList.contains('taken'))){
+          currentPosition = currentPosition - 1
+      }
+
+      draw()
+    }
+  }
+  
+  function rotate(){
+    if(timer1 != null || timer3 != null){
+
+      undraw()
+
+      // Check if rotate collides
+      auxRotation = (currentRotation + 1) % 4
+      auxSquares = theTetrominoes[actualPiece][currentRotation]
+
+      vet = []
+
+      auxSquares.forEach(index => {
+          vet.push((currentPosition + index) % 10)
+      })
+
+      var cross = 0
+      for(var x = 0; x < vet.length; x++){
+          for(var y = 0; y < vet.length; y++){
+              if(Math.abs(vet[x] - vet[y]) > 3){
+                  cross = 1;
+                  break;
+              }
+          }
+      }
+
+      if(!cross && !auxSquares.some(index => squares[currentPosition + index].classList.contains('taken'))){
+          currentRotation = auxRotation
+          actualBlocks = auxSquares
+      }
+
+      draw()
+    }
+  }
+
 })
