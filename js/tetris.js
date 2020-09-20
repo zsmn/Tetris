@@ -166,13 +166,14 @@ document.addEventListener('DOMContentLoaded', () => {
       timer1 = setInterval(moveDown,originalWait)
       clearInterval(timer3)
       if(fastDown)timer3 = setInterval(moveDown,wait)
+      if(!fastDown)clearInterval(timer3) //isso é uma possível redundância
+
     }
     if(boolAnima == false && boolClean == false){
-
+      //isso é uma grande possível redundância
       if(timer1 == null){
         console.log('to aqui gente')
-        timer1 = setInterval(moveDown,originalWait)
-        if(fastDown)timer3 = setInterval(moveDown,wait)
+        //timer1 = setInterval(moveDown,originalWait)
         clearInterval(timer3)
       }
     }
@@ -275,6 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rotate()
     }
     if(e.keyCode === 40){
+      fastDown = false //isso acabou com o bug
       wait = originalWait
       if(timer1){
         fastDown = false
@@ -292,12 +294,12 @@ document.addEventListener('DOMContentLoaded', () => {
         wait = Math.min(wait,100)
         clearInterval(timer3)
         timer3 = null
-        if(timer1){
+        if(timer1 && /*esse && !timer3 nem faz sentido estar aqui, pq eu acabei de setar ele pra null*/!timer3){
           fastDown = true
           clearInterval(timer3)
           timer3 = setInterval(moveDown,wait)
         }
-      }
+      } 
     }
   }
   document.addEventListener('keydown', downBlock)
