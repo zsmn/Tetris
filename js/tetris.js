@@ -154,7 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer3)
       timer3 = null
       timer1 = null
-      animate()
+      if(indan.length == 4 ){
+        animaTetris()
+      }else{
+        animate()
+      }
       for(var i=0; i< (100000000/5)*2 ; i++){
 
       }
@@ -179,6 +183,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   timer2 = setInterval(animator,1)
+
+  function animaTetris(){
+    var iteractions = quadColor.length
+    if(countAnim < iteractions){
+        indan.forEach(i =>{
+            for(var j=0; j<width; j++){
+                quadColor.forEach(type => {
+                    squares[i*width + j].classList.remove(type)
+                })
+                squares[i*width + j].classList.add(quadColor[countAnim])
+            }
+        })
+        countAnim++;
+    }else{
+      boolAnima = false
+      boolClean = true
+      indan = []
+      countAnim = 0
+    }
+    for(var i=0; i< (200000000/5)*2 ; i++){
+
+    }
+  }
 
   function animate(){
     var iteractions = (width/2)
