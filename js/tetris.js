@@ -61,44 +61,170 @@ const quadColor = ['qpurple', 'qgreen', 'qred', 'qorange', 'qyellow', 'qblue', '
 const theTetrominoes = [Ipiece, Jpiece, Lpiece, Opiece, Spiece, Tpiece, Zpiece]
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Creating grid
+	// Creating grid
   const grid = document.querySelector('.grid')
   for(var x = 0; x < (width * height); x++){
   	grid.innerHTML += "<div></div>"
   }
   
   // Loading squares
-  const squares = Array.from(document.querySelectorAll('.grid div'))
+	const squares = Array.from(document.querySelectorAll('.grid div'))
   
   // Loading score and start button vars
   const scoreDisplay = document.querySelector('#score')
   const startButton  = document.querySelector('#start-button')
+  const linesDisplay = document.querySelector('#lines')
   
-  //Variables associated with the grid.
   var currentPosition = 4
   var currentRotation = 0
   var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
   var actualBlocks = theTetrominoes[actualPiece][currentRotation]
+  var boolClean = false
+  var boolAnima = false
+  var indan = []
+  var level = 0
+  var score = 0
+  var lines = 0
 
-  //Function to Draw every block of the grid
   function draw(){
     actualBlocks.forEach(item => {
       squares[(currentPosition + item)].classList.add(quadColor[actualPiece])
     })
   }
 
-  //Function to undraw every block of the grid	 
   function undraw(){
     actualBlocks.forEach(item =>{
       squares[currentPosition + item].classList.remove(quadColor[actualPiece])
     })
   }
+  
+  function cleanit(){
+    let indexes = []
+    var nlines = 0
+    for(var i=0; i<20; i++){
+      var clean = 0
+      for(var j=0; j<10; j++){
+        if(squares[(i*width) + j].classList.contains('taken')){
+          clean++
+        }
+      }
+      if(clean == 10){
+        nlines++
+        indexes = indexes.concat([i])
+      }
+    }
+    destroy(indexes)
+    let mnlin = [0,100,250,400,800]
+    let multi = (level+1)
+    score += multi * mnlin[nlines]
+    lines += nlines
+    scoreDisplay.innerHTML = score
+    linesDisplay.innerHTML = lines
 
+  }
+  
+  function destroy(indexes){
+    if(indexes.length > 0){
+      indexes.forEach(i => {
+        for(var j=0; j<10; j++){
+          quadColor.forEach(type => squares[(i*width) + j].classList.remove(type))
+          squares[(i*width) + j].classList.remove('taken')
+        }
+        for(var k = i-1; k>=0; k--){
+          for(var j=0; j<10; j++){
+            if(squares[(k*width) + j].classList.contains('taken')){
+              squares[(k*width) + j].classList.remove('taken')
+              quadColor.forEach(item => {
+                if(squares[(k*width) + j].classList.contains(item)){
+                  squares[(k*width) + j].classList.remove(item)
+                  squares[((k+1)*width) + j].classList.add(item)
+                }
+              })
+              squares[((k+1)*width) + j].classList.add('taken')
+            }
+          }
+        }
+      })
+    }
+  }
+  
+  function animator(){
+    if(boolAnima == true){
+      clearInterval(timer1)
+      clearInterval(timer3)
+      timer3 = null
+      timer1 = null
+      animate()
+      for(var i=0; i< (100000000/5)*2 ; i++){
+
+      }
+    }
+    if(boolClean == true){
+      cleanit()
+      boolClean = false
+      clearInterval(timer1)
+      timer1 = setInterval(moveDown,originalWait)
+      clearInterval(timer3)
+      if(fastDown)timer3 = setInterval(moveDown,wait)
+    }
+    if(boolAnima == false && boolClean == false){
+
+      if(timer1 == null){
+        console.log('to aqui gente')
+        timer1 = setInterval(moveDown,originalWait)
+        if(fastDown)timer3 = setInterval(moveDown,wait)
+        clearInterval(timer3)
+      }
+    }
+  }
+  timer2 = setInterval(animator,1)
+  function animate(){
+    if(countAnim < 5){
+      indan.forEach(i =>{
+        quadColor.forEach(type => {
+          squares[i*width + (4-countAnim)].classList.remove(type)
+          squares[i*width + (5+countAnim)].classList.remove(type)
+        })
+      })
+      countAnim++
+    }else{
+      boolAnima = false
+      boolClean = true
+      indan = []
+      countAnim = 0
+    }
+  }
+  
   function moveDown(){
     freeze()
     undraw()
     currentPosition += width
     draw()
+    verify()
+  }
+  
+  function verify(){
+    indan = []
+    let indexes = []
+    var nlines = 0
+    for(var i=0; i<20; i++){
+      var clean = 0
+      for(var j=0; j<10; j++){
+        if(squares[(i*width) + j].classList.contains('taken')){
+          clean++
+        }
+      }
+      if(clean == 10){
+        nlines++
+        indexes = indexes.concat([i])
+      }
+    }
+    if(nlines > 0){
+      indan = indexes
+      boolAnima = true
+      countAnim = 0
+      clearInterval(timer1)
+    }
   }
 
 	function freeze(){
@@ -109,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lock = true
       }
     })
+    
     if(lock == false){
       actualBlocks.forEach(item => {
         if(squares[currentPosition + item + width].classList.contains('taken')){
@@ -116,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
     }
+    
     if(lock == true){
       actualBlocks.forEach(item => {
       	squares[(currentPosition + item)].classList.add('taken')
@@ -206,6 +334,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
+  /*
+  function rotate(){
+    if(timer1 != null || timer3 != null){
+
+      undraw()
+
+      // Check if rotate collides
+      auxRotation = (currentRotation + 1) % 4
+      auxSquares = theTetrominoes[actualPiece][currentRotation]
+
+      vet = []
+
+      auxSquares.forEach(index => {
+          vet.push((currentPosition + index) % 10)
+      })
+
+      var cross = 0
+      for(var x = 0; x < vet.length; x++){
+          for(var y = 0; y < vet.length; y++){
+              if(Math.abs(vet[x] - vet[y]) > 3){
+                  cross = 1;
+                  break;
+              }
+          }
+      }
+
+      if(!cross && !auxSquares.some(index => squares[currentPosition + index].classList.contains('taken'))){
+          currentRotation = auxRotation
+          actualBlocks = auxSquares
+      }
+
+      draw()
+    }
+  }
+  */
+  
   function rotate(){
     if(timer1 != null || timer3 != null){
       var newRotation = (currentRotation -1 + 4)%4
@@ -242,6 +406,5 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
       }
     }
-  }
-
+	}
 })
