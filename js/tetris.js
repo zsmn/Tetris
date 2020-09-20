@@ -71,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const squares = Array.from(document.querySelectorAll('.grid div'))
   
   // Loading score and start button vars
-  const scoreDisplay = document.querySelector('#score')
+  const scoreDisplay = document.querySelector('#score_val')
   const startButton  = document.querySelector('#start-button')
-  const linesDisplay = document.querySelector('#lines')
+  const linesDisplay = document.querySelector('#lines_val')
   
   var currentPosition = 4
   var currentRotation = 0
@@ -101,14 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function cleanit(){
     let indexes = []
     var nlines = 0
-    for(var i=0; i<20; i++){
+    for(var i=0; i<height; i++){
       var clean = 0
-      for(var j=0; j<10; j++){
+      for(var j=0; j<width; j++){
         if(squares[(i*width) + j].classList.contains('taken')){
           clean++
         }
       }
-      if(clean == 10){
+      if(clean == width){
         nlines++
         indexes = indexes.concat([i])
       }
@@ -126,12 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function destroy(indexes){
     if(indexes.length > 0){
       indexes.forEach(i => {
-        for(var j=0; j<10; j++){
+        for(var j=0; j<width; j++){
           quadColor.forEach(type => squares[(i*width) + j].classList.remove(type))
           squares[(i*width) + j].classList.remove('taken')
         }
         for(var k = i-1; k>=0; k--){
-          for(var j=0; j<10; j++){
+          for(var j=0; j<width; j++){
             if(squares[(k*width) + j].classList.contains('taken')){
               squares[(k*width) + j].classList.remove('taken')
               quadColor.forEach(item => {
@@ -178,12 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   timer2 = setInterval(animator,1)
+
   function animate(){
-    if(countAnim < 5){
+    var iteractions = (width/2)
+    if(countAnim < iteractions){
       indan.forEach(i =>{
         quadColor.forEach(type => {
-          squares[i*width + (4-countAnim)].classList.remove(type)
-          squares[i*width + (5+countAnim)].classList.remove(type)
+          squares[i*width + ((iteractions-1)-countAnim)].classList.remove(type)
+          squares[i*width + (iteractions+countAnim)].classList.remove(type)
         })
       })
       countAnim++
@@ -207,14 +209,14 @@ document.addEventListener('DOMContentLoaded', () => {
     indan = []
     let indexes = []
     var nlines = 0
-    for(var i=0; i<20; i++){
+    for(var i=0; i<height; i++){
       var clean = 0
-      for(var j=0; j<10; j++){
+      for(var j=0; j<width; j++){
         if(squares[(i*width) + j].classList.contains('taken')){
           clean++
         }
       }
-      if(clean == 10){
+      if(clean == width){
         nlines++
         indexes = indexes.concat([i])
       }
@@ -380,11 +382,11 @@ document.addEventListener('DOMContentLoaded', () => {
         turn = false
       }
       var indLef = 0
-      var colLef = (newBlocks[0])%10
+      var colLef = (newBlocks[0])%width
       var indRig = 0
-      var colRig = (newBlocks[0])%10
+      var colRig = (newBlocks[0])%width
       for(var i=0; i<4; i++){
-        var colatu = (newBlocks[i])%10
+        var colatu = (newBlocks[i])%width
         if(colatu < colLef){
           colLef = colatu
           indLef = i
@@ -394,8 +396,8 @@ document.addEventListener('DOMContentLoaded', () => {
           indRig = i
         }
       }
-      var ncr = (currentPosition + newBlocks[indRig])%10
-      var ncl = (currentPosition + newBlocks[indLef])%10
+      var ncr = (currentPosition + newBlocks[indRig])%width
+      var ncl = (currentPosition + newBlocks[indLef])%width
       if(ncr < ncl){
         turn = false
       }
