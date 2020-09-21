@@ -128,7 +128,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   )
   //EventListener do New Game
-  //newGameButton.addEventListener()
+  //EventListener do New Game
+  newGameButton.addEventListener('click', () => {
+    squares.forEach(square => {
+      square.classList.remove('taken')
+      quadColor.forEach(color => {
+        square.classList.remove(color)
+      })
+    })
+    currentPosition = 4
+    currentRotation = 0
+    actualPiece = Math.floor(Math.random()*theTetrominoes.length)
+    actualBlocks = theTetrominoes[actualPiece][currentRotation]
+    boolClean = false
+    boolAnima = false
+    indan = []
+    level = 0
+    score = 0
+    lines = 0
+    scoreDisplay.innerHTML = score
+    linesDisplay.innerHTML = lines
+    clearInterval(timer1)
+    clearInterval(timer2)
+    clearInterval(timer3)
+    timer1 = null
+    timer2 = null
+    timer3 = null
+  })
 
   function draw(){
     actualBlocks.forEach(item => {
