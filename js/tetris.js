@@ -128,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   )
   //EventListener do New Game
-  //EventListener do New Game
   newGameButton.addEventListener('click', () => {
     squares.forEach(square => {
       square.classList.remove('taken')
