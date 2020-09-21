@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Loading squares
 	const squares = Array.from(document.querySelectorAll('.grid div'))
-  var mini_squares = Array.from(document.querySelectorAll('.mini-grid div'))
+  const mini_squares = Array.from(document.querySelectorAll('.mini-grid div'))
 
   // Loading score and start button vars
   const scoreDisplay = document.querySelector('#score_val')
@@ -97,17 +97,20 @@ document.addEventListener('DOMContentLoaded', () => {
   var nextBlocks = theTetrominoes[nextPiece][currentRotation]
   var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
   var actualBlocks = theTetrominoes[actualPiece][currentRotation]
-  var boolGameon = true
-  var boolClean = false
-  var boolAnima = false
-  var indan = []
+  var boolGameon = true // avisa se o jogo está rodando
+  var boolClean = false //booleano que permite limpar a linha apos a animação
+  var boolAnima = false //booleano que permite animar a linha
+  var indan = [] //vetor com o indice de cada linha que deve ser animada e posteriormente destruida
   var level = 0
   var score = 0
   var lines = 0
-  var timer1 = null
-  var timer2 = null
-  var timer3 = null
-
+  var timer1 = null //repetidor da função de descer
+  var timer2 = null //repetidor do animador
+  var timer3 = null //repetidor da função de descer mais rápido
+  var fastDown = false //indica se o jogador está pressionando a seta pra baixo
+  var originalWait = 500 //tempo que o repetidor demora para descer
+  var wait = originalWait
+  
   //EventListener do StartButton
   startButton.addEventListener('click', () => {
       if(boolGameon){
@@ -427,11 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Setting loop for moveDown tetrominoes
-  var fastDown = false
-  var originalWait = 500
-  var wait = originalWait
-  var timer3 = null
+
   function control(e){
     if(e.keyCode === 37){
       moveLeft()
