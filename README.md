@@ -16,7 +16,8 @@ https://tetris-ess.herokuapp.com
 * JavaScript
 * CSS
 * HTML
-* Bulma? (Um framework de CSS)
+* Bulma (Um framework de CSS)
+* SweetAlert
 * Heroku 
 
 ## Processo de Desenvolvimento
