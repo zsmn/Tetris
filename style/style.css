@@ -3,8 +3,6 @@
     display: flex;
   }
 
- 
-
   /*Conteiner of the buttons*/
   .buttons{
     display: flex;
@@ -29,11 +27,14 @@
   /*Next piece grid*/
   .mini-grid{
     margin-left: 50px;
-    width: 132px;
-    height: 88px;
+    width: 120px;
+    height: 80px;
     display: flex;
     flex-wrap: wrap;
     background-color: black;
+    border-width: 5px;
+    border-color: silver;
+
   }
   
   .mini-grid div{
@@ -51,6 +52,8 @@
     display: flex;
     flex-wrap: wrap;
     background-color: black;
+    border-width: 5px;
+    border-color: silver
   }
   
 

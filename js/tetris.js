@@ -4,6 +4,10 @@
 const width = 20
 const height = 20
 
+//Mini_Grid constants
+const mini_width = 6
+const mini_height = 4
+
 // Tetrominoes
 const Ipiece = [
   [width, width+1, width+2, width+3],
@@ -66,10 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
   for(var x = 0; x < (width * height); x++){
   	grid.innerHTML += "<div></div>"
   }
+
+  //Creating mini-grid
+  const mini_grid = document.querySelector('.mini-grid')
+  for(var i = 0; i < (mini_width * mini_height); i++){
+    mini_grid.innerHTML +="<div></div>"
+  }
   
   // Loading squares
 	const squares = Array.from(document.querySelectorAll('.grid div'))
-  
+  var mini_squares = Array.from(document.querySelectorAll('.mini-grid div'))
+
   // Loading score and start button vars
   const scoreDisplay = document.querySelector('#score_val')
   const startButton = document.querySelector('#start-button')
@@ -82,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
   var currentPosition = 4
   var currentRotation = 0
+  var nextPiece = Math.floor(Math.random()*theTetrominoes.length)
+  var nextBlocks = theTetrominoes[nextPiece][currentRotation]
   var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
   var actualBlocks = theTetrominoes[actualPiece][currentRotation]
   var boolClean = false
@@ -170,7 +183,21 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[currentPosition + item].classList.remove(quadColor[actualPiece])
     })
   }
-  
+
+  function undraw_next(){
+    nextBlocks.forEach(item =>{
+      var NextSqPosition = ((Math.floor((item+width)/width)*mini_width) + ((item%width)%mini_width)+1)
+      mini_squares[NextSqPosition].classList.remove(quadColor[nextPiece])
+    })
+  }
+
+  function draw_next(){
+    nextBlocks.forEach(item =>{
+      var NextSqPosition = ((Math.floor((item+width)/width)*mini_width) + ((item%width)%mini_width)+1)
+      mini_squares[NextSqPosition].classList.add(quadColor[nextPiece])
+    })
+  }
+
   function cleanit(){
     let indexes = []
     var nlines = 0
@@ -300,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   function moveDown(){
+    draw_next()
     freeze()
     undraw()
     currentPosition += width
@@ -353,13 +381,17 @@ document.addEventListener('DOMContentLoaded', () => {
       actualBlocks.forEach(item => {
       	squares[(currentPosition + item)].classList.add('taken')
     	})
-
+      undraw_next()
       currentPosition = 4
       currentRotation = 0
-      actualPiece = Math.floor(Math.random()*theTetrominoes.length)
+      nextPiece = Math.floor(Math.random()*theTetrominoes.length)
+      actualPiece = nextPiece
       actualBlocks = theTetrominoes[actualPiece][currentRotation]
+      nextBlocks = theTetrominoes[nextPiece][currentRotation]
+      
       gameOver() //Nessa posicao, a peca acabou de ser criada (ou seja, ta na primeira linha).
       //O gameOver() tem que ta aqui.
+      draw_next()
     }
   }
   
