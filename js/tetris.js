@@ -77,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const newGameButton = document.querySelector('#new-game-button') 
   const linesDisplay = document.querySelector('#lines_val')
   
+  // Loading music
+  const audio = document.getElementById('tetrisAudio')
+  
   var currentPosition = 4
   var currentRotation = 0
   var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
@@ -97,11 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
         timer1 = setInterval(moveDown, originalWait)
         //actualPiece = Math.floor(Math.random()*theTetrominoes.length)
+        audio.play()
       }
       if(!timer2){
         timer2 = setInterval(animator, 1)
       }
-      if(fastDown){
+      if(fastDown && !timer3){
         timer3 = setInterval(moveDown, wait)
       }
     }
@@ -109,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //EventListener do PauseButton
   pauseButton.addEventListener('click', () => {
       if(timer1){ //Verifica se pode mover para baixo
+        audio.pause()
         clearInterval(timer1)
         timer1 = null
       }
@@ -208,8 +213,9 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer1)
       timer1 = setInterval(moveDown,originalWait)
       clearInterval(timer3)
-      if(fastDown)timer3 = setInterval(moveDown,wait)
-      if(!fastDown)clearInterval(timer3) //isso é uma possível redundância
+      timer3 = null
+      if(fastDown) timer3 = setInterval(moveDown,wait)
+      if(!fastDown) clearInterval(timer3) //isso é uma possível redundância
 
     }
     if(boolAnima == false && boolClean == false){
@@ -218,10 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('to aqui gente')
         //timer1 = setInterval(moveDown,originalWait)
         clearInterval(timer3)
+        timer3 = null
       }
     }
   }
-  timer2 = setInterval(animator,1)
 
   function animaTetris(){
     var iteractions = quadColor.length
@@ -293,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
       boolAnima = true
       countAnim = 0
       clearInterval(timer1)
+      timer1 = null
     }
   }
 
@@ -333,12 +340,18 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer1)
       clearInterval(timer2)
       clearInterval(timer3)
-      var ss = ""
+      timer1 = null
+      timer2 = null
+      timer3 = null
+
+      // Pause audio
+      audio.pause()
+      audio.currentTime = 0
+
+      // Alert
       swal({
-        title: "GAME-OVER",
-        text: "Your score is: " + score,
-        //button: "New Game",
-        imageSize: '80x80',
+        title: "Game Over",
+        text: "Your score was: " + score,
         icon: "https://ethicsalarms.files.wordpress.com/2015/12/nelson-haha.png",
       })
     }
@@ -348,7 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var fastDown = false
   var originalWait = 500
   var wait = originalWait
-  timer1 = setInterval(moveDown, wait)
   var timer3 = null
   function control(e){
     if(e.keyCode === 37){
