@@ -283,9 +283,28 @@ document.addEventListener('DOMContentLoaded', () => {
       currentRotation = 0
       actualPiece = Math.floor(Math.random()*theTetrominoes.length)
       actualBlocks = theTetrominoes[actualPiece][currentRotation]
+      gameOver() //Nessa posicao, a peca acabou de ser criada (ou seja, ta na primeira linha).
+      //O gameOver() tem que ta aqui.
     }
   }
   
+  //Funcao do Game-Over
+  function gameOver(){
+    if(actualBlocks.some(index => squares[currentPosition + index].classList.contains('taken'))){
+      clearInterval(timer1)
+      clearInterval(timer2)
+      clearInterval(timer3)
+      var ss = ""
+      swal({
+        title: "GAME-OVER",
+        text: "Your score is: " + score,
+        //button: "New Game",
+        imageSize: '80x80',
+        icon: "https://ethicsalarms.files.wordpress.com/2015/12/nelson-haha.png",
+      })
+    }
+  }
+
   // Setting loop for moveDown tetrominoes
   var fastDown = false
   var originalWait = 500
