@@ -153,6 +153,10 @@ document.addEventListener('DOMContentLoaded', () => {
     timer1 = null
     timer2 = null
     timer3 = null
+
+    // Pause audio
+    audio.pause()
+    audio.currentTime = 0
   })
 
   function draw(){
