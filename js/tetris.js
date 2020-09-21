@@ -148,6 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.remove(color)
       })
     })
+    mini_squares.forEach(square => {
+      quadColor.forEach(color => {
+        square.classList.remove(color)
+      })
+    })
     currentPosition = 4
     currentRotation = 0
     actualPiece = Math.floor(Math.random()*theTetrominoes.length)
