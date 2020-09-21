@@ -1,5 +1,5 @@
 # Tetris
-![[logo11](https://http://riscv.org/)](logo.jpg)
+![[logo11]()](misc/img/logo.jpg)
 
 ## Integrantes
 * Victor Hugo Meirelles Silva (vhms)
@@ -28,4 +28,4 @@ https://tetris-ess.herokuapp.com
 
 
 ## Capturas de Tela
-![[scap1](https://http://riscv.org/)](screen_capture.png)
+![[scap1]()](misc/img/screen_capture.png)
