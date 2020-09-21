@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var nextBlocks = theTetrominoes[nextPiece][currentRotation]
   var actualPiece = Math.floor(Math.random()*theTetrominoes.length)
   var actualBlocks = theTetrominoes[actualPiece][currentRotation]
+  var boolGameon = true
   var boolClean = false
   var boolAnima = false
   var indan = []
@@ -109,17 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //EventListener do StartButton
   startButton.addEventListener('click', () => {
-      if(!timer1){
-        draw()
-        timer1 = setInterval(moveDown, originalWait)
-        //actualPiece = Math.floor(Math.random()*theTetrominoes.length)
-        audio.play()
-      }
-      if(!timer2){
-        timer2 = setInterval(animator, 1)
-      }
-      if(fastDown && !timer3){
-        timer3 = setInterval(moveDown, wait)
+      if(boolGameon){
+        if(!timer1){
+          draw()
+          timer1 = setInterval(moveDown, originalWait)
+          //actualPiece = Math.floor(Math.random()*theTetrominoes.length)
+          audio.play()
+        }
+        if(!timer2){
+          timer2 = setInterval(animator, 1)
+        }
+        if(fastDown && !timer3){
+          timer3 = setInterval(moveDown, wait)
+        }
       }
     }
   )
@@ -153,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.remove(color)
       })
     })
+    boolGameon = true
     currentPosition = 4
     currentRotation = 0
     actualPiece = Math.floor(Math.random()*theTetrominoes.length)
@@ -389,8 +393,8 @@ document.addEventListener('DOMContentLoaded', () => {
       undraw_next()
       currentPosition = 4
       currentRotation = 0
-      nextPiece = Math.floor(Math.random()*theTetrominoes.length)
       actualPiece = nextPiece
+      nextPiece = Math.floor(Math.random()*theTetrominoes.length)
       actualBlocks = theTetrominoes[actualPiece][currentRotation]
       nextBlocks = theTetrominoes[nextPiece][currentRotation]
       
@@ -409,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timer1 = null
       timer2 = null
       timer3 = null
-
+      boolGameon = false
       // Pause audio
       audio.pause()
       audio.currentTime = 0
