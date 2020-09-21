@@ -72,7 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Loading score and start button vars
   const scoreDisplay = document.querySelector('#score_val')
-  const startButton  = document.querySelector('#start-button')
+  const startButton = document.querySelector('#start-button')
+  const pauseButton = document.querySelector('#pause-button')
+  const newGameButton = document.querySelector('#new-game-button') 
   const linesDisplay = document.querySelector('#lines_val')
   
   var currentPosition = 4
@@ -85,6 +87,43 @@ document.addEventListener('DOMContentLoaded', () => {
   var level = 0
   var score = 0
   var lines = 0
+  var timer1 = null
+  var timer2 = null
+  var timer3 = null
+
+  //EventListener do StartButton
+  startButton.addEventListener('click', () => {
+      if(!timer1){
+        draw()
+        timer1 = setInterval(moveDown, originalWait)
+        //actualPiece = Math.floor(Math.random()*theTetrominoes.length)
+      }
+      if(!timer2){
+        timer2 = setInterval(animator, 1)
+      }
+      if(fastDown){
+        timer3 = setInterval(moveDown, wait)
+      }
+    }
+  )
+  //EventListener do PauseButton
+  pauseButton.addEventListener('click', () => {
+      if(timer1){ //Verifica se pode mover para baixo
+        clearInterval(timer1)
+        timer1 = null
+      }
+      if(timer2){
+        clearInterval(timer2)
+        timer2 = null
+      }
+      if(timer3){
+        clearInterval(timer3)
+        timer3 = null
+      }
+    }
+  )
+  //EventListener do New Game
+  //newGameButton.addEventListener()
 
   function draw(){
     actualBlocks.forEach(item => {
