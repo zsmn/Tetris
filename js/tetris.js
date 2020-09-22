@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var fastDown = false //indica se o jogador está pressionando a seta pra baixo
   var originalWait = 500 //tempo que o repetidor demora para descer
   var wait = originalWait
+  var animtime = 50
   
   //EventListener do StartButton
   startButton.addEventListener('click', () => {
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
           audio.play()
         }
         if(!timer2){
-          timer2 = setInterval(animator, 1)
+          timer2 = setInterval(animator, animtime)
         }
         if(fastDown && !timer3){
           timer3 = setInterval(moveDown, wait)
@@ -315,9 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
       indan = []
       countAnim = 0
     }
-    for(var i=0; i< (200000000/5)*2 ; i++){
-
-    }
   }
 
   function animate(){
@@ -507,19 +505,14 @@ document.addEventListener('DOMContentLoaded', () => {
   /*
   function rotate(){
     if(timer1 != null || timer3 != null){
-
       undraw()
-
       // Check if rotate collides
       auxRotation = (currentRotation + 1) % 4
       auxSquares = theTetrominoes[actualPiece][currentRotation]
-
       vet = []
-
       auxSquares.forEach(index => {
           vet.push((currentPosition + index) % 10)
       })
-
       var cross = 0
       for(var x = 0; x < vet.length; x++){
           for(var y = 0; y < vet.length; y++){
@@ -529,12 +522,10 @@ document.addEventListener('DOMContentLoaded', () => {
               }
           }
       }
-
       if(!cross && !auxSquares.some(index => squares[currentPosition + index].classList.contains('taken'))){
           currentRotation = auxRotation
           actualBlocks = auxSquares
       }
-
       draw()
     }
   }
