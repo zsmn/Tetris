@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Loading music
   const audio = document.getElementById('tetrisAudio')
+  audio.volume = 0.05
   
   var currentPosition = 4
   var currentRotation = 0
