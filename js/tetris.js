@@ -1,57 +1,60 @@
 /* JS */
 
 // Grid constants
-const width = 20
+var width = 20
 const height = 20
 
 //Mini_Grid constants
 const mini_width = 6
 const mini_height = 4
 
+//square constants
+const square_side = 20
+
 // Tetrominoes
-const Ipiece = [
+var Ipiece = [
   [width, width+1, width+2, width+3],
   [2, width+2, 2*width+2, 3*width+2],
   [2*width, 2*width+1, 2*width+2, 2*width+3],
   [1, width+1, 2*width+1, 3*width+1]
 ]
 
-const Jpiece = [
+var Jpiece = [
   [0, width, width+1, width+2],
   [2, 1, width+1, 2*width+1],
   [width, width+1, width+2, 2*width+2],
   [1, width+1, 2*width+1, 2*width]
 ]
 
-const Lpiece = [
+var Lpiece = [
   [width, width+1, width+2, 2],
   [1, width+1, 2*width+1, 2*width+2],
   [2*width, width, width+1, width+2],
   [0, 1, width+1, 2*width+1]
 ]
 
-const Opiece = [
+var Opiece = [
   [1,2,width+1,width+2],
   [1,2,width+1,width+2],
   [1,2,width+1,width+2],
   [1,2,width+1,width+2]
 ]
 
-const Spiece = [
+var Spiece = [
   [2, 1, width+1, width],
   [1, width+1, width+2, 2*width+2],
   [2*width, 2*width+1, width+1, width+2],
   [0, width, width+1, 2*width+1]
 ]
 
-const Tpiece = [
+var Tpiece = [
   [1, width, width+1, width+2],
   [1, width+1, 2*width+1, width+2],
   [width, width+1, width+2, 2*width+1],
   [1, width+1, 2*width+1, width]
 ]
 
-const Zpiece = [
+var Zpiece = [
   [0, 1, width+1, width+2],
   [2, width+2, width+1, 2*width+1],
   [width, width+1, 2*width+1, 2*width+2],
@@ -62,12 +65,14 @@ const Zpiece = [
 const quadColor = ['qpurple', 'qgreen', 'qred', 'qorange', 'qyellow', 'qblue', 'qbrown']
 
 // Tetrominoes vector
-const theTetrominoes = [Ipiece, Jpiece, Lpiece, Opiece, Spiece, Tpiece, Zpiece]
+var theTetrominoes = [Ipiece, Jpiece, Lpiece, Opiece, Spiece, Tpiece, Zpiece]
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Creating grid
-  const grid = document.querySelector('.grid')
-  for(var x = 0; x < (width * height); x++){
+  var grid = document.querySelector('.grid')
+  grid.style.width = (square_side*width) + 'px'
+  grid.innerHTML = ""
+  for(var x = 0; x < ( width* height); x++){
   	grid.innerHTML += "<div></div>"
   }
 
@@ -78,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Loading squares
-	const squares = Array.from(document.querySelectorAll('.grid div'))
+	var squares = Array.from(document.querySelectorAll('.grid div'))
   const mini_squares = Array.from(document.querySelectorAll('.mini-grid div'))
 
   // Loading score and start button vars
@@ -161,11 +166,26 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.remove(color)
       })
     })
+    //
+    //width = 20
+    grid = document.querySelector('.grid')
+    grid.innerHTML = ""
+    grid.style.width = (square_side*width) + 'px'
+    for(var x = 0; x < ( width* height); x++){
+  	  grid.innerHTML += "<div></div>"
+    }
+    squares = Array.from(document.querySelectorAll('.grid div'))
+    rebuildPieces()
+
+    //
+
     boolGameon = true
     currentPosition = 4
     currentRotation = 0
     actualPiece = Math.floor(Math.random()*theTetrominoes.length)
     actualBlocks = theTetrominoes[actualPiece][currentRotation]
+    nextPiece = Math.floor(Math.random()*theTetrominoes.length)
+    nextBlocks = theTetrominoes[nextPiece][currentRotation]
     boolClean = false
     boolAnima = false
     indan = []
@@ -180,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timer1 = null
     timer2 = null
     timer3 = null
-
+    
     // Pause audio
     audio.pause()
     audio.currentTime = 0
@@ -335,6 +355,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   function moveDown(){
+    if(audio.currentTime == audio.duration){
+      audio.pause()
+      audio.currentTime = 0
+      audio.play()
+    }
     draw_next()
     freeze()
     undraw()
@@ -565,5 +590,57 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
       }
     }
-	}
+  }
+  
+  function rebuildPieces(){
+    Ipiece = [
+      [width, width+1, width+2, width+3],
+      [2, width+2, 2*width+2, 3*width+2],
+      [2*width, 2*width+1, 2*width+2, 2*width+3],
+      [1, width+1, 2*width+1, 3*width+1]
+    ]
+    
+    Jpiece = [
+      [0, width, width+1, width+2],
+      [2, 1, width+1, 2*width+1],
+      [width, width+1, width+2, 2*width+2],
+      [1, width+1, 2*width+1, 2*width]
+    ]
+    
+    Lpiece = [
+      [width, width+1, width+2, 2],
+      [1, width+1, 2*width+1, 2*width+2],
+      [2*width, width, width+1, width+2],
+      [0, 1, width+1, 2*width+1]
+    ]
+    
+    Opiece = [
+      [1,2,width+1,width+2],
+      [1,2,width+1,width+2],
+      [1,2,width+1,width+2],
+      [1,2,width+1,width+2]
+    ]
+    
+    Spiece = [
+      [2, 1, width+1, width],
+      [1, width+1, width+2, 2*width+2],
+      [2*width, 2*width+1, width+1, width+2],
+      [0, width, width+1, 2*width+1]
+    ]
+    
+    Tpiece = [
+      [1, width, width+1, width+2],
+      [1, width+1, 2*width+1, width+2],
+      [width, width+1, width+2, 2*width+1],
+      [1, width+1, 2*width+1, width]
+    ]
+    
+    Zpiece = [
+      [0, 1, width+1, width+2],
+      [2, width+2, width+1, 2*width+1],
+      [width, width+1, 2*width+1, 2*width+2],
+      [1, width+1, width, 2*width]
+    ]
+    theTetrominoes = [Ipiece, Jpiece, Lpiece, Opiece, Spiece, Tpiece, Zpiece]    
+  }
 })
