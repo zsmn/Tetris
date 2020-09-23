@@ -272,9 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }else{
         animate()
       }
-      for(var i=0; i< (100000000/5)*2 ; i++){
-
-      }
     }
     if(boolClean == true){
       cleanit()
