@@ -88,11 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Loading score and start button vars
   const scoreDisplay = document.querySelector('#score_val')
+  const nextmodeDisplay = document.querySelector('#next_mode')
   const startButton = document.querySelector('#start-button')
   const pauseButton = document.querySelector('#pause-button')
   const newGameButton = document.querySelector('#new-game-button') 
   const linesDisplay = document.querySelector('#lines_val')
-  
+  const modeButton = document.querySelector('#mode-button')
+
   // Loading music
   const audio = document.getElementById('tetrisAudio')
   audio.volume = 0.05
@@ -117,7 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
   var originalWait = 500 //tempo que o repetidor demora para descer
   var wait = originalWait
   var animtime = 50
+  var nextwidth = width
   
+  //
+  modeButton.addEventListener('click', () =>{
+    if(nextwidth == 20)nextwidth = 10
+    else nextwidth = 20
+    nextmodeDisplay.innerHTML = nextwidth
+  })
+
   //EventListener do StartButton
   startButton.addEventListener('click', () => {
       if(boolGameon){
@@ -167,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     })
     //
-    //width = 20
+    width = nextwidth
     grid = document.querySelector('.grid')
     grid.innerHTML = ""
     grid.style.width = (square_side*width) + 'px'
