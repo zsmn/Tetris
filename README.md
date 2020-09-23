@@ -36,4 +36,5 @@ https://tetris-ess.herokuapp.com
 
 
 ## Capturas de Tela
-![[scap1]()](misc/img/screen_capture.png)
+![[scap1]()](misc/img/screenshot2.png)
+![[scap2]()](misc/img/screenshot3.png)
