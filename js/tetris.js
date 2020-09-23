@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
   )
   //EventListener do PauseButton
   pauseButton.addEventListener('click', () => {
+      audio.pause()
       if(timer1){ //Verifica se pode mover para baixo
-        audio.pause()
         clearInterval(timer1)
         timer1 = null
       }
