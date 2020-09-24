@@ -12,7 +12,7 @@
 ## Link para o Jogo
 https://tetris-ess.herokuapp.com
 
-## Linka para o post sobre o desenvolvimento no LinkedIn
+## Link para o post sobre o desenvolvimento no LinkedIn
 https://www.linkedin.com/feed/update/urn:li:activity:6714362975941103616/
 
 ## Tecnologias Utilizadas no Desenvolvimento
