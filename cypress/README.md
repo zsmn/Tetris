@@ -4,7 +4,7 @@
 ### Objetivo
 * Ao realizar a implementação dos testes fim a fim, nós buscamos testar por completo a nossa aplicação do Tetris. Essa forma de testar busca verificar que todas as partes integrantes da aplicação (software) estão funcionando em conjunto. Para isso, esse tipo de teste busca simular um caso real de uso por um usuário.
 ### Ferramenta Utilizada
-* Optamos por utilizar o framework de Javascript chamado: Cypress.io. Escolhemos ele por ser de simples utilização, apresentar uma boa documentação e ter uma curva de aprendizado menor se comparado ao seus concorrentes, como por exemplo o Selenium.
+* Optamos por utilizar o framework de Javascript chamado: Cypress.io. Escolhemos ele por ser de simples utilização, apresentar uma boa documentação e ter uma curva de aprendizado menor se comparado aos seus concorrentes, como por exemplo o Selenium.
 ### Casos de Testes Fim a Fim efetuados
 * Teste para saber se o link da aplicação pode ser acessado normalmente.
 * Teste para checar se os botões da página (Mode, Start/Resume, Pause, New Game) estão sendo carregados e se estão funcionando corretamente.
