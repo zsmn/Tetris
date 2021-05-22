@@ -10,7 +10,7 @@
 
   /*Conteiner of Text*/
   html{
-      background-color: #01baef
+      background-color: #381792
       /*background-color: #44206d;*/
   }
   
@@ -28,19 +28,21 @@
   /*Next piece grid*/
   .mini-grid{
     margin-left: 50px;
-    width: 120px;
-    height: 80px;
+    width: 170px;
+    height: 110px;
     display: flex;
     flex-wrap: wrap;
     background-color: black;
     border-width: 5px;
+    border-style: solid;
+    border-radius: 2%;
     border-color: silver;
 
   }
   
   .mini-grid div{
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border-width: 1px;
     border-style: solid;
     border-color: black;
@@ -48,19 +50,21 @@
   
   /*Main grid*/
   .grid{
-    width: 400px;
-    height: 400px;
+    width: 510px;
+    height: 510px;
     display: flex;
     flex-wrap: wrap;
     background-color: black;
     border-width: 5px;
+    border-style: solid;
+    border-radius: 1%;
     border-color: silver
   }
   
 
   .grid div{
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border-width: 1px;
     border-style: solid;
     border-color: black;

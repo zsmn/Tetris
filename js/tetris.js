@@ -1,15 +1,16 @@
 /* JS */
 
 // Grid constants
-var width = 20
+var width = 10
 const height = 20
+const borderLength = 5
 
 //Mini_Grid constants
 const mini_width = 6
 const mini_height = 4
 
 //square constants
-const square_side = 20
+const square_side = 25
 
 // Tetrominoes
 var Ipiece = [
@@ -70,7 +71,7 @@ var theTetrominoes = [Ipiece, Jpiece, Lpiece, Opiece, Spiece, Tpiece, Zpiece]
 document.addEventListener('DOMContentLoaded', () => {
 	// Creating grid
   var grid = document.querySelector('.grid')
-  grid.style.width = (square_side*width) + 'px'
+  grid.style.width = ((square_side*width) + (2*borderLength)) + 'px'
   grid.innerHTML = ""
   for(var x = 0; x < ( width* height); x++){
   	grid.innerHTML += "<div></div>"
@@ -180,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     width = nextwidth
     grid = document.querySelector('.grid')
     grid.innerHTML = ""
-    grid.style.width = (square_side*width) + 'px'
+    grid.style.width = (square_side*width) + (2*borderLength) + 'px'
     for(var x = 0; x < ( width* height); x++){
   	  grid.innerHTML += "<div></div>"
     }
@@ -463,16 +464,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function control(e){
-    if(e.keyCode === 37){
+    if(e.keyCode === 65){
       moveLeft()
     }
-    if(e.keyCode === 39){
+    if(e.keyCode === 68){
       moveRight()
     }
-    if(e.keyCode === 38){
+    if(e.keyCode === 87){
       rotate()
     }
-    if(e.keyCode === 40){
+    if(e.keyCode === 83){
       fastDown = false //isso acabou com o bug
       wait = originalWait
       if(timer1){
@@ -486,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keyup',control)
   
   function downBlock(e){
-    if(e.keyCode === 40){
+    if(e.keyCode === 83){
       if(!fastDown){
         wait = Math.min(wait,100)
         clearInterval(timer3)
