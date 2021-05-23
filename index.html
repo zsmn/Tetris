@@ -39,6 +39,9 @@
                     </button>
                     <button class="button is-primary is-light" id="start-button"> 
                         Start/Resume 
+                    </button>
+                    <button class="button is-primary is-light" id="instruct-button">
+                        Instructions
                     </button> 
                     <button class="button is-danger" id="pause-button"> 
                         Pause
@@ -54,15 +57,16 @@
             <div class="column">
                     <h4 class="title is-4" id="score" style="margin-left:37.5%"> Player's Score: <span id = "score_val">0</span></h4>
                     <h4 class="title is-4" id="lines" style="margin-left:38.5%"> Burned Lines: <span id = "lines_val">0</span></h4>
-                    <h5 class="title is-5" style="margin-left:40%"> Next Tetromino:</h5>
-                <center>    
-                    <div class="mini-grid"></div>
-                </center>
             </div>
-            <div class="column">
+            <div class="column" style="margin-left: 50px;">
                 <center>
-                    <div class="bgimg"></div>
-                    <div class="grid"></div>
+                    <div style="display: flex">
+                        <div class="grid"></div>
+                        <div>
+                            <div class="mini-grid"></div>
+                        </div>
+                    </div>
+                    
                 </center>
             </div>
             <div class="column">

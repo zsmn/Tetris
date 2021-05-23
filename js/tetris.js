@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const newGameButton = document.querySelector('#new-game-button') 
   const linesDisplay = document.querySelector('#lines_val')
   const modeButton = document.querySelector('#mode-button')
+  const instructButton = document.querySelector('#instruct-button')
 
   // Loading music
   const audio = document.getElementById('tetrisAudio')
@@ -147,6 +148,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   )
+
+  //Instruction
+  instructButton.addEventListener('click', () => {
+    audio.pause()
+      if(timer1){ //Verifica se pode mover para baixo
+        clearInterval(timer1)
+        timer1 = null
+      }
+      if(timer2){
+        clearInterval(timer2)
+        timer2 = null
+      }
+      if(timer3){
+        clearInterval(timer3)
+        timer3 = null
+      }
+    swal({
+      title: "Instructions",
+      text: "Use w to rotate each tetromino.\nUse a to move each tetromino to the left.\nUse d to move each tetromino to the right.\nUse s to accelerate each tetromino to the bottom of the grid.\nAfter filling up one entirely line, you earn 10 points.\n",
+    })
+  })
+
   //EventListener do PauseButton
   pauseButton.addEventListener('click', () => {
       audio.pause()
