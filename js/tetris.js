@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     swal({
       title: "Instructions",
-      text: "Use w to rotate each tetromino.\nUse a to move each tetromino to the left.\nUse d to move each tetromino to the right.\nUse s to accelerate each tetromino to the bottom of the grid.\nAfter filling up one entirely line, you earn 10 points.\n",
+      text: "Use w to rotate each tetromino.\nUse a to move each tetromino to the left.\nUse d to move each tetromino to the right.\nUse s to accelerate each tetromino to the bottom of the grid.\nAfter filling up one entirely line, you earn 10 points.\nTo change mode press mode and new-game",
     })
   })
 
