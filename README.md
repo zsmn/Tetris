@@ -37,5 +37,5 @@ https://www.linkedin.com/feed/update/urn:li:activity:6714362975941103616/
 * Dado a nossa experiência nula em CSS e HTML, essa parte de realizar a estilização foi bem complicada. Primeiro para entender como tudo funciona (com a questão das tags e como o HTML se linka ao CSS) e depois para realizar as modificações que nós queriamos realizar para deixar o site o mais agradável possível. Diante disso, optamos por utilizar um framework de CSS chamado Bulma. Escolhemos esse framework pelos seguintes motivos: Documentação abragente, visual elegante, fácil instalação, curva de aprendizado curta e falta de necessidade de fazer linkagens com o JavaScript.
 
 ## Capturas de Tela
-![[scap1]()](misc/img/screenshot2.png)
-![[scap2]()](misc/img/screenshot3.png)
+![[scap1]()](misc/img/screenshot22.png)
+![[scap2]()](misc/img/screenshot32.png)
